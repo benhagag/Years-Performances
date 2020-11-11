@@ -27,6 +27,7 @@ class App extends Component {
   /**
    * On click   the year we will get data from the back end
    * We will send in get request the Year anf by that we will get back the data result performance by each year
+   * Table Performances - Year, Performance type, Percent
    */
   clickYearHandler(year){
     console.log(year);
