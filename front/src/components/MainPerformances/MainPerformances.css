@@ -1,0 +1,21 @@
+.MainPerformances {
+    width: 40%;
+    height: 100%;
+    float: left;
+    /* border-collapse: collapse; */
+}
+
+.CircularProgressbar{
+   width: 36%;
+   margin: 10px;
+   padding: 10px;
+   height: 210px;
+   margin-left: 20px;
+   align-items: 'center'
+}
+
+.CircularProgressbar text{
+
+   font-size: 50px;
+   
+ }

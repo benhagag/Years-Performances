@@ -1,0 +1,23 @@
+.Years {
+    width: 10%;
+    height: 100%;
+    position: relative;
+    float: right;
+    /* background-color: yellow; */
+    border-collapse: collapse;
+    text-align: center;
+}
+.Years ul{
+    list-style-type:none;
+    margin-top: 40px;
+}
+
+.Years ul li{
+    margin-top: 20px;
+}
+
+.Years ul li:hover{
+    color: rgb(218, 65, 65);
+    cursor: pointer;
+    font-size: 25px;
+}
