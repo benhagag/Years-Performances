@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import axios from 'axios';
 import classes from './App.css';
 
 import MainPerformances from './components/MainPerformances/MainPerformances';
@@ -8,38 +9,69 @@ import Years from './components/Years/Years';
 
 class App extends Component {
 
-  state={
-    subPerformances:{
-      data: 50,
-      it: 10,
-      regulation:30,
-      cyber:10,
-      programing:17,
-      communications: 85,
-      innovation:94,
-      coreSystems: 23,
-    },
-    mainPerformances:{
-      cpe: 50,
-      personalProject: 10,
-    }  
-  }
-  /**
-   * On click   the year we will get data from the back end
-   * We will send in get request the Year anf by that we will get back the data result performance by each year
-   * Table Performances - Year, Performance type, Percent
-   */
-  clickYearHandler(year){
-    console.log(year);
+  constructor(props){
+    super(props);
+    this.state = {
+      subPerformances:{
+        data: 0,
+        it: 0,
+        regulation:0,
+        cyber:0,
+        programing:0,
+        communications: 0,
+        innovation:0,
+        coreSystems: 0,
+      },
+      mainPerformances:{
+        cpe: 0,
+        personalProject: 0,
+      },
+      year: 2015
+
+    };
+
+    this.clickYearHandler(this.state.year);
   }
 
+clickYearHandler(year){
+    console.log(year);
+    this.setState({year: year});
+    fetch(`http://localhost:8080/tests/softwave/years-perfomance/back/?year=${year}`)
+    .then(res => res.json())
+    .then(
+    (result) => {
+      console.log(result);
+      let subPerformances = {...this.state.subPerformances};
+      let mainPerformances = {...this.state.mainPerformances};
+      console.log(mainPerformances);
+      // console.log(subPerformances);
+
+      result.forEach(element => {
+
+          mainPerformances[element.Performace_type] = element.Performace_percent;
+          subPerformances[element.Performace_type] = element.Performace_percent;
+
+      });
+
+      this.setState({
+        subPerformances: subPerformances,
+        mainPerformances: mainPerformances
+      });
+    },
+    (error) => {
+      throw new Error(error)
+    }
+  )
+}
+
   render() {
+    
     return (
       <div className={classes.App}>
         <ul>
           <SubPerformances subPerformances={this.state.subPerformances} />
           <MainPerformances mainPerformances={this.state.mainPerformances}/>
-          <Years clicked={this.clickYearHandler} />
+          <Years clicked={this.clickYearHandler.bind(this)} year={this.state.year}/>
         </ul>
       </div>
     );

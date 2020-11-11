@@ -17,6 +17,12 @@
 }
 
 .Years ul li:hover{
+    color: black;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.Years .clicked{
     color: rgb(218, 65, 65);
     cursor: pointer;
     font-size: 25px;
